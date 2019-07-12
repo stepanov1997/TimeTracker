@@ -27,7 +27,7 @@ namespace TimeTracker.Controllers
             _logger.LogInformation($"Getting user by id: {Id}");
             var user = await _dbContext.Users.FindAsync(Id);
 
-            if(user==null)
+            if (user == null)
             {
                 _logger.LogWarning($"User with id: {Id} not found");
                 return NotFound();
@@ -36,7 +36,7 @@ namespace TimeTracker.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PagedList<UserModel>>> GetPage(int page=1, int size=5)
+        public async Task<ActionResult<PagedList<UserModel>>> GetPage(int page = 1, int size = 5)
         {
             _logger.LogInformation($"Getting a page {page} of users with page size {size}");
 
@@ -54,6 +54,58 @@ namespace TimeTracker.Controllers
                 TotalCount = totalUsers
             };
 
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserModel>> Delete(long Id)
+        {
+            _logger.LogInformation($"Deleting user by id: {Id}");
+            var user = await _dbContext.Users.FindAsync(Id);
+
+            if (user == null)
+            {
+                _logger.LogWarning($"User with id: {Id} not found");
+                return NotFound();
+            }
+            _dbContext.Users.Remove(user);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UserModel>> Create(UserInputModel model)
+        {
+            _logger.LogInformation($"Creating a new user with name {model.Name}");
+
+            var user = new User();
+            model.MapTo(user);
+
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+
+            var resultModel = UserModel.FromUser(user);
+
+            return CreatedAtAction(nameof(GetById), "users", new { id = user.Id }, resultModel);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UserModel>> Update(long id, UserInputModel model)
+        {
+            _logger.LogInformation($"Updating user with id {id}");
+            var user = await _dbContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                _logger.LogWarning($"User with id: {id} not found");
+                return NotFound();
+            }
+
+            model.MapTo(user);
+
+            _dbContext.Users.Update(user);
+            await _dbContext.SaveChangesAsync();
+
+            return UserModel.FromUser(user);
         }
     }
 }
