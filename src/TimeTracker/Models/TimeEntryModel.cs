@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TimeTracker.Domain;
 
 namespace TimeTracker.Models
 {
     public class TimeEntryModel
     {
+        private TimeEntryModel()
+        {
+        }
+
         public long Id { get; set; }
         public long ProjectId { get; set; }
         public string ProjectName { get; set; }
@@ -20,10 +21,9 @@ namespace TimeTracker.Models
         public decimal HourRate { get; set; }
         public decimal Total => Hours * HourRate;
 
-        private TimeEntryModel() { }
         public static TimeEntryModel FromUser(TimeEntry timeEntry)
         {
-            return new TimeEntryModel()
+            return new TimeEntryModel
             {
                 ClientName = timeEntry.Project.Client.Name,
                 Description = timeEntry.Description,

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading.Tasks;
 using TimeTracker.Data;
 using TimeTracker.Domain;
 using TimeTracker.Models;
@@ -15,6 +15,7 @@ namespace TimeTracker.Controllers
     {
         private readonly TimeTrackerDbContext _dbContext;
         private readonly ILogger<UsersController> _logger;
+
         public UsersController(TimeTrackerDbContext dbContext, ILogger<UsersController> logger)
         {
             _dbContext = dbContext;
@@ -32,6 +33,7 @@ namespace TimeTracker.Controllers
                 _logger.LogWarning($"User with id: {Id} not found");
                 return NotFound();
             }
+
             return UserModel.FromUser(user);
         }
 
@@ -53,8 +55,8 @@ namespace TimeTracker.Controllers
                 PageSize = size,
                 TotalCount = totalUsers
             };
-
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserModel>> Delete(long Id)
         {
@@ -66,6 +68,7 @@ namespace TimeTracker.Controllers
                 _logger.LogWarning($"User with id: {Id} not found");
                 return NotFound();
             }
+
             _dbContext.Users.Remove(user);
             await _dbContext.SaveChangesAsync();
 
@@ -85,7 +88,7 @@ namespace TimeTracker.Controllers
 
             var resultModel = UserModel.FromUser(user);
 
-            return CreatedAtAction(nameof(GetById), "users", new { id = user.Id }, resultModel);
+            return CreatedAtAction(nameof(GetById), "users", new {id = user.Id}, resultModel);
         }
 
         [HttpPut("{id}")]

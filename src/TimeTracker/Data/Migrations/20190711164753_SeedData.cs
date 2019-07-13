@@ -7,77 +7,77 @@ namespace TimeTracker.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "Clients",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1L, "Client 1" });
+                "Clients",
+                new[] {"Id", "Name"},
+                new object[] {1L, "Client 1"});
 
             migrationBuilder.InsertData(
-                table: "Clients",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 2L, "Client 2" });
+                "Clients",
+                new[] {"Id", "Name"},
+                new object[] {2L, "Client 2"});
 
             migrationBuilder.InsertData(
-                table: "Projects",
-                columns: new[] { "Id", "ClientId", "Name" },
-                values: new object[] { 3L, 2L, "Project 3" });
+                "Projects",
+                new[] {"Id", "ClientId", "Name"},
+                new object[] {3L, 2L, "Project 3"});
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "HourRate", "Name" },
-                values: new object[] { 1L, 15m, "User 1" });
+                "Users",
+                new[] {"Id", "HourRate", "Name"},
+                new object[] {1L, 15m, "User 1"});
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "HourRate", "Name" },
-                values: new object[] { 2L, 10m, "User 2" });
+                "Users",
+                new[] {"Id", "HourRate", "Name"},
+                new object[] {2L, 10m, "User 2"});
 
             migrationBuilder.InsertData(
-                table: "Projects",
-                columns: new[] { "Id", "ClientId", "Name" },
-                values: new object[] { 1L, 1L, "Project 1" });
+                "Projects",
+                new[] {"Id", "ClientId", "Name"},
+                new object[] {1L, 1L, "Project 1"});
 
             migrationBuilder.InsertData(
-                table: "Projects",
-                columns: new[] { "Id", "ClientId", "Name" },
-                values: new object[] { 2L, 1L, "Project 2" });
+                "Projects",
+                new[] {"Id", "ClientId", "Name"},
+                new object[] {2L, 1L, "Project 2"});
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "Projects",
-                keyColumn: "Id",
-                keyValue: 1L);
+                "Projects",
+                "Id",
+                1L);
 
             migrationBuilder.DeleteData(
-                table: "Projects",
-                keyColumn: "Id",
-                keyValue: 2L);
+                "Projects",
+                "Id",
+                2L);
 
             migrationBuilder.DeleteData(
-                table: "Projects",
-                keyColumn: "Id",
-                keyValue: 3L);
+                "Projects",
+                "Id",
+                3L);
 
             migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 1L);
+                "Users",
+                "Id",
+                1L);
 
             migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 2L);
+                "Users",
+                "Id",
+                2L);
 
             migrationBuilder.DeleteData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: 1L);
+                "Clients",
+                "Id",
+                1L);
 
             migrationBuilder.DeleteData(
-                table: "Clients",
-                keyColumn: "Id",
-                keyValue: 2L);
+                "Clients",
+                "Id",
+                2L);
         }
     }
 }

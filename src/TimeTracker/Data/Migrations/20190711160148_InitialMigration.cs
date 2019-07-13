@@ -8,99 +8,93 @@ namespace TimeTracker.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
+                "Clients",
+                table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>()
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "Users",
+                table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>()
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false),
-                    HourRate = table.Column<decimal>(nullable: false)
+                    Name = table.Column<string>(),
+                    HourRate = table.Column<decimal>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
+                "Projects",
+                table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>()
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(),
                     ClientId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projects_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
+                        "FK_Projects_Clients_ClientId",
+                        x => x.ClientId,
+                        "Clients",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TimeEntries",
-                columns: table => new
+                "TimeEntries",
+                table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>()
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProjectId = table.Column<long>(nullable: false),
-                    EntryDate = table.Column<DateTime>(nullable: false),
-                    Hours = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    HourRate = table.Column<decimal>(nullable: false)
+                    ProjectId = table.Column<long>(),
+                    EntryDate = table.Column<DateTime>(),
+                    Hours = table.Column<int>(),
+                    Description = table.Column<string>(),
+                    HourRate = table.Column<decimal>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TimeEntries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TimeEntries_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
+                        "FK_TimeEntries_Projects_ProjectId",
+                        x => x.ProjectId,
+                        "Projects",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_ClientId",
-                table: "Projects",
-                column: "ClientId");
+                "IX_Projects_ClientId",
+                "Projects",
+                "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TimeEntries_ProjectId",
-                table: "TimeEntries",
-                column: "ProjectId");
+                "IX_TimeEntries_ProjectId",
+                "TimeEntries",
+                "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TimeEntries");
+                "TimeEntries");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "Users");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                "Projects");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                "Clients");
         }
     }
 }
