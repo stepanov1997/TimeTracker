@@ -8,7 +8,7 @@ namespace TimeTracker.Models
 
         public void MapTo(Client client)
         {
-            Name = client.Name;
+            client.Name = Name;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TimeTracker.Models
 
         public void MapTo(Project project)
         {
-            Name = project.Name;
+            project.Name = Name;
         }
     }
 }

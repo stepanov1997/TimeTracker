@@ -14,11 +14,11 @@ namespace TimeTracker.Models
 
         public void MapTo(TimeEntry timeEntry)
         {
-            ProjectId = timeEntry.Project.Id;
-            UserId = timeEntry.User.Id;
-            EntryDate = timeEntry.EntryDate;
-            Hours = timeEntry.Hours;
-            Description = timeEntry.Description;
+            timeEntry.Project.Id = ProjectId;
+            timeEntry.User.Id= UserId;
+            timeEntry.EntryDate= EntryDate;
+            timeEntry.Hours = Hours;
+            timeEntry.Description= Description;
         }
     }
 }

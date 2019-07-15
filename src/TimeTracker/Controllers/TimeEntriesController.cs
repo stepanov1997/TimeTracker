@@ -33,7 +33,7 @@ namespace TimeTracker.Controllers
             var timeEntry = await _dbContext.TimeEntries
                 .Include(x=>x.Project)
                 .Include(x=>x.Project.Client)
-                //.Include(x=> x.User)
+                .Include(x=> x.User)
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             if (timeEntry == null) return NotFound();
@@ -46,7 +46,7 @@ namespace TimeTracker.Controllers
             _logger.LogDebug($"Getting a page {page} of time entries with page size {size}");
 
             var timeEntries = await _dbContext.TimeEntries
-               // .Include(x => x.User)
+                .Include(x => x.User)
                 .Include(x => x.Project)
                 .Include(x => x.Project.Client)
                 .Skip((page - 1) * size)

@@ -89,7 +89,7 @@ namespace TimeTracker.Controllers
 
             var resultModel = ClientModel.FromClient(client);
 
-            return CreatedAtAction(nameof(GetById), $"clients", new {id = client.Id}, resultModel);
+            return CreatedAtAction(nameof(GetById), "clients", new {id = client.Id}, resultModel);
         }
 
         [HttpPut("{id}")]
