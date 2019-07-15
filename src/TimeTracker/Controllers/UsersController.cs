@@ -50,7 +50,7 @@ namespace TimeTracker.Controllers
             var totalUsers = await _dbContext.Users.CountAsync();
             return new PagedList<UserModel>
             {
-                items = users.Select(UserModel.FromUser),
+                Items = users.Select(UserModel.FromUser),
                 Page = page,
                 PageSize = size,
                 TotalCount = totalUsers

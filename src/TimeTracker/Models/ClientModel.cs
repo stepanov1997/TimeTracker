@@ -1,4 +1,5 @@
-﻿using TimeTracker.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
+using TimeTracker.Domain;
 
 namespace TimeTracker.Models
 {
@@ -11,7 +12,7 @@ namespace TimeTracker.Models
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public static ClientModel FromUser(Client client)
+        public static ClientModel FromClient(Client client)
         {
             return new ClientModel
             {
@@ -19,5 +20,6 @@ namespace TimeTracker.Models
                 Name = client.Name
             };
         }
+
     }
 }

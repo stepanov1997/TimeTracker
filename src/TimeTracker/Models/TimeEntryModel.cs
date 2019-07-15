@@ -21,7 +21,7 @@ namespace TimeTracker.Models
         public decimal HourRate { get; set; }
         public decimal Total => Hours * HourRate;
 
-        public static TimeEntryModel FromUser(TimeEntry timeEntry)
+        public static TimeEntryModel FromTimeEntry(TimeEntry timeEntry)
         {
             return new TimeEntryModel
             {
