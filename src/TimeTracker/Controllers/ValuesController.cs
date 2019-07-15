@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TimeTracker.Controllers
@@ -18,6 +19,7 @@ namespace TimeTracker.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            throw  new Exception("Testiranje");
             return "value";
         }
 
